@@ -21,30 +21,30 @@ document.getElementById("addItem").onclick = () => {
     activityTask = [activity];
   }
   saveData(activityTask);
+  displayData(activityTask);
 };
 let displayData = (workList) => {
   let result = "";
   if (workList) {
     workList.map((item) => {
       result += `
-                <ul>
                     <li>
                         <div class=""col-7>
-                            ${item.activityWord}              
+                            ${item.activityName}              
                         </div>
                         <span>
-                            <button class ="col-3 bg-success text-danger" onclick="deleteActivity()">
+                            <button class ="col-9 bg-success text-danger" onclick="deleteActivity(${item.activityWord})">
                                 xóa
 
                             </button>
-                            <button class=""col-3 bg-info text-success onclick"checkingActivitiy()">Kiểm tra</button>
+                            <button class=""col-7  bg-info text-success onclick"checkingActivitiy(${item.activityWord})">Kiểm tra</button>
                         </span>
                     </li>
-                </ul>
             
             `;
     });
   }
+  document.getElementById("todo").innerHTML = result;
 };
 //hiển thi
 let getData = () => {
@@ -54,6 +54,12 @@ let getData = () => {
 let saveData = (data) => {
   localStorage.setItem("taskList", JSON.stringify(data));
 };
+let checkingExistData =(workList)=>{
+    let result ="";
+    if(workList == true){
+        workList.map
+    }
+}
 const deleteActivity =(activity)=>{
     tasksDone = getData();
     let taskWorking = tasksDone.findIndex(item=> item.activity == activity)
@@ -61,7 +67,7 @@ const deleteActivity =(activity)=>{
     saveData(taskWorking);
     getData(taskWorking)
 }
-const deleteActivity = (activity) => {
+const deleteActivityAll = (activity) => {
     // lấy dữ liệu từ localStorage
     listTask = loadData();
 
@@ -70,14 +76,14 @@ const deleteActivity = (activity) => {
     //listFood.splice(foodIndex, 1);
 
     //C2 filter ngược
-    let arrayTask = listTask.filter(item => item.taskCode != taskCode);
+    let activityList = listTask.filter(item => item.activity != activity);
 
    
 
     // gọi hàm lưu data lên localstorage
-    saveData(arrayTask);
+    saveData(activityList);
 
     //gọi data từ localstorage
-    showData(arrayTask);
+    showData(activityList);
 }
 
